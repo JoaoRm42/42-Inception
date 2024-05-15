@@ -2,26 +2,26 @@
 FROM debian:bullseye
 
 #Let's Expose the port por nginx to run on
-EXPOSE 443
+EXPOSE 433
 
 # Check for updates and install the necessary files
 # to install nginx and openssl successfully
 RUN apt update && apt upgrade -y
 RUN apt install lib32readline8 lib32readline-dev -y
-RUN apt install nginx openssl -y
+RUN apt install nginx openssl libssl-dev -y
 
 # We first copy the configuration file of nginx to the container
 COPY ./conf/nginx.conf /etc/nginx/conf.d
-
 # Create Path to the ssl certificate and
 # generate a self signed certificate
 RUN mkdir etc/nginx/ssl
-RUN openssl req -x509 -days 365 -newkey rsa:4096 \
-        -sha256 -nodes -out etc/nginx/ssl/joaoped2.crt \
-        -keyout etc/nginx/ssl/joaoped2.key \
-        -subj "/C=PT/ST=Porto/L=Porto/O=42/OU=joaoped2/CN=joaoped2@student.42porto.com"
+RUN openssl req -x509 -new -newkey rsa:2048 -nodes \
+                -out etc/nginx/ssl/joaoped2_42_fr.csr \
+                -keyout etc/nginx/ssl/joaoped2_42_fr.key \
+                -subj "/C=PT/ST=Porto/L=Porto/O=42/OU=joaoped2/CN=joaoped2.42.fr"
 
 
+RUN service nginx restart
 # Let's create a folder for nginx to store runtime files
 # I use mkdir -p so if the folder already exists it ignores
 # the process of creating it and doesn't return an error
