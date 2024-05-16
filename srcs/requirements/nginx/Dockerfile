@@ -1,7 +1,7 @@
 # Operating System used on the container
 FROM debian:bullseye
 
-# Let's Expose the port por nginx to run on
+# Let's Expose the port for nginx to run on
 EXPOSE 443
 
 # Check for updates and install the necessary files

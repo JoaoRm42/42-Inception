@@ -1,7 +1,7 @@
 # Operating System used on the container
 FROM debian:bullseye
 
-# Let's Expose the port por mariadb to run on
+# Let's Expose the port for mariadb to run on
 EXPOSE 3306
 
 # Check for updates and install the necessary files
