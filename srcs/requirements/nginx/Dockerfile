@@ -1,13 +1,12 @@
 # Operating System used on the container
 FROM debian:bullseye
 
-#Let's Expose the port por nginx to run on
+# Let's Expose the port por nginx to run on
 EXPOSE 443
 
 # Check for updates and install the necessary files
 # to install nginx and openssl successfully
 RUN apt update && apt upgrade -y
-RUN apt install lib32readline8 lib32readline-dev -y
 RUN apt install nginx openssl libssl-dev -y
 
 # We first copy the configuration file of nginx to the container
