@@ -5,22 +5,22 @@
 
 # Function to install WordPress
 install_wordpress() {
-    wp core install --url="$DOMAIN_NAME" \
-                    --title="$WP_TITLE" \
-                    --admin_user="$WP_ADMIN_USER" \
-                    --admin_password="$WP_ADMIN_PASSWORD" \
-                    --admin_email="$WP_ADMIN_EMAIL" \
+    wp core install --url="$DOMAIN" \
+                    --title="$TITLE_WP" \
+                    --admin_user="$SPUSR_WP" \
+                    --admin_password="$SPUSR_PWD_WP" \
+                    --admin_email="$SPUSR_EMAIL_WP" \
                     --skip-email \
-                    --path="$WP_PATH" \
+                    --path="$PATH_WP" \
                     --allow-root
 }
 
 # Function to create a new WordPress user
 create_wp_user() {
-    wp user create "$WP_USER" "$WP_USER_EMAIL" \
-                   --user_pass="$WP_USER_PASSWORD" \
+    wp user create "$USR_WP" "$USR_EMAIL_WP" \
+                   --user_pass="$USR_PWD_WP" \
                    --role=author \
-                   --path="$WP_PATH" \
+                   --path="$PATH_WP" \
                    --allow-root
 }
 
