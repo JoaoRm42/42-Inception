@@ -1,0 +1,57 @@
+services:
+  nginx:
+    build: requirements/nginx
+    env_file:
+      - .env
+    container_name: nginx
+    depends_on:
+      - wordpress
+    volumes:
+      - wordpress:/var/www/wordpress
+    ports:
+      - "433:433"
+    networks:
+      - joaoped2
+    restart: always
+  wordpress:
+    build: requirements/wordpress
+    env_file:
+      - .env
+    container_name: wordpress
+    depends_on:
+      - mariadb
+    volumes:
+      - wordpress:var/www/wordpress
+    ports: "9000:9000"
+    networks:
+      - joaoped2
+    restart: always
+  mariadb:
+    build: requirements/mariadb
+    env_file:
+      - .env
+    container_name: mariadb
+    volumes:
+      - mariadb:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    networks:
+      - joaoped2
+    restart: always
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "/home/joaoped2/inception/WP_V"
+  mariadb:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: "/home/joaoped2/inception/MDB_V"
+networks:
+  joaoped2:
+    driver: bridge
+
