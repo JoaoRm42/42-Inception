@@ -6,13 +6,35 @@ expected_answer_no="no"
 user=$(whoami)
 useremail="$user@student@42porto.com"
 
-#Welcoming message to user
-echo "####################################################"
-echo "#                                                  #"
-echo "#      Welcome and Enjoy your stay                 #"
-echo "#      User_: $user                                #"
-echo "#      Email: $useremail                           #"
-echo "####################################################"
+# Define fixed parts of the text
+welcome_message="Welcome and Enjoy your stay"
+user_label="User_: "
+email_label="Email: "
+
+# Calculate the lengths of the fixed parts
+welcome_length=${#welcome_message}
+user_label_length=${#user_label}
+email_label_length=${#email_label}
+
+# Calculate the total lengths of the lines
+user_line_length=$((user_label_length + ${#user}))
+email_line_length=$((email_label_length + ${#useremail}))
+
+# Determine the maximum length
+max_length=$((welcome_length > user_line_length ? welcome_length : user_line_length))
+max_length=$((max_length > email_line_length ? max_length : email_line_length))
+
+# Create the border
+border_length=$((max_length + 6))  # 6 accounts for the "   # " and " #  "
+border=$(printf '#%.0s' $(seq 1 $border_length))
+
+# Print the formatted output
+echo "$border"
+echo "#  $(printf '%*s' $((max_length)) "")  #"
+echo "#  $(printf '%*s' $(((max_length - ${#welcome_message}) / 2)))$welcome_message$(printf '%*s' $(((max_length - ${#welcome_message}) / 2)))  #"
+echo "#  $(printf '%*s' $(((max_length - ${#user_label} - ${#user}) / 2)))$user_label$user$(printf '%*s' $(((max_length - ${#user_label} - ${#user}) / 2)))  #"
+echo "#  $(printf '%*s' $(((max_length - ${#email_label} - ${#useremail}) / 2)))$email_label$useremail$(printf '%*s' $(((max_length - ${#email_label} - ${#useremail}) / 2)))  #"
+echo "$border"
 
 exit
 
