@@ -3,12 +3,20 @@ chmod 777 "$0"
 frames=("⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏" "⠋" "⠙" "⠹" "⠸" "⠼" "⠴" "⠦" "⠧" "⠇" "⠏")
 expected_answer_yes="yes"
 expected_answer_no="no"
+
+#!/bin/bash
+
+# Set the welcome message
+welcome_message="Welcome and Enjoy your stay"
+
+# Set the user's name
 user=$(whoami)
-useremail="$user@student@42porto.com"
+
+# Set the user's email
+useremail="${user}@student@42porto.com"
 
 # Define fixed parts of the text
-welcome_message="Welcome and Enjoy your stay"
-user_label="User_: "
+user_label="User: "
 email_label="Email: "
 
 # Calculate the lengths of the fixed parts
@@ -28,25 +36,30 @@ max_length=$((max_length > email_line_length ? max_length : email_line_length))
 border_length=$((max_length + 6))  # 6 accounts for the "   # " and " #  "
 border=$(printf '#%.0s' $(seq 1 $border_length))
 
+# Calculate the padding for the welcome message
+padding_length=$((border_length - 4 - welcome_length))  # 4 accounts for the " # " and " # "
+padding_half_length=$((padding_length / 2))
+
 # Print the formatted output
-echo "$border"
-echo "#  $(printf '%*s' $((max_length)) "")  #"
-echo "#  $(printf '%*s' $(((max_length - ${#welcome_message}) / 2)))$welcome_message$(printf '%*s' $(((max_length - ${#welcome_message}) / 2)))  #"
-echo "#  $(printf '%*s' $(((max_length - ${#user_label} - ${#user}) / 2)))$user_label$user$(printf '%*s' $(((max_length - ${#user_label} - ${#user}) / 2)))  #"
-echo "#  $(printf '%*s' $(((max_length - ${#email_label} - ${#useremail}) / 2)))$email_label$useremail$(printf '%*s' $(((max_length - ${#email_label} - ${#useremail}) / 2)))  #"
-echo "$border"
-
-exit
-
+header(){
+	echo "$border"
+	echo "#  $(printf '%*s' $((max_length)) "")  #"
+	echo "# $(printf '%*s' $(((border_length - welcome_length - 4) / 2)))${welcome_message}$(printf '%*s' $(((border_length - welcome_length - 4) / 2 			+ ($(( (border_length - welcome_length - 4) % 2 ))) )) ) #"
+	echo "#  $(printf '%*s' $(((max_length - ${#user_label} - ${#user}) / 2)))$user_label$user$(printf '%*s' $(((max_length - ${#user_label} - ${#user}) / 2)))   #"
+	echo "#  $(printf '%*s' $(((max_length - ${#email_label} - ${#useremail}) / 2)))$email_label$useremail$(printf '%*s' $(((max_length - ${#email_label} - ${#useremail}) / 2)))  #"
+	echo "$border"
+	echo
+}
+header
 # Friendly screen clear
 echo "Want to clear the terminal before"
 echo "executing the script?"
-echo "(Type yes/no)"
-echo -n "|>"
+echo -n "(Type yes/no): "
 read answer
 while true; do
     if [ "$answer" == "$expected_answer_yes" ]; then
         clear
+        header
         break
     elif [ "$answer" == "$expected_answer_no" ]; then
         break
@@ -59,37 +72,78 @@ done
 
 
 # Password Check
-echo "Enter your password: "
-echo -n "|>"
+echo -n "Enter your password: "
 read -s pwd
-clear
+tput cuu1
+tput el
+echo
 echo "$password" | sudo -S ls / > /dev/null 2>&1
 for frame in "${frames[@]}"; do
     echo -ne "$frame Checking if Password is correct\r"
     sleep 0.2
 done
-clear
 if [ $? -eq 0 ]; then
+    tput el
     echo "Password is correct"
     sleep 2
+    tput cuu1 && tput el
 else
+    tput el
     echo "Incorrect password"
     sleep 2
     clear
     exit
 fi
-clear
-
 
 
 # Fixing Debian 12 Problem of the package error
-echo "1234" | if ! grep -q "\[trusted=yes\]" /etc/apt/sources.list; then
+for frame in "${frames[@]}"; do
+    echo -ne "$frame Fixing APT Sourcelist\r"
+    sleep 0.2
+done
+echo $pwd | if ! grep -q "\[trusted=yes\]" /etc/apt/sources.list; then
     sudo sed -i 's/^deb /deb [trusted=yes] /g' /etc/apt/sources.list
     sudo sed -i 's/^deb-src /deb-src [trusted=yes] /g' /etc/apt/sources.list
-else
-    echo "[trusted=yes] already exists"
+    sleep 2
 fi
+tput el
 
+# Install Make
+sudo apt install make -y > /dev/null 2> install_errors.log
+for frame in "${frames[@]}"; do
+    echo -ne "$frame Installing make\r"
+    sleep 0.2
+done
+tput el
 
-# Install packages
-sudo apt install make -y
+# Install Docker
+# https://docs.docker.com/engine/install/debian/
+sudo apt update > /dev/null 2> install_errors.log
+sudo apt install ca-certificates curl -y > /dev/null 2> install_errors.log
+sudo install -m 0755 -d /etc/apt/keyrings > /dev/null 2> install_errors.log
+sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc > /dev/null 2> install_errors.log
+sudo chmod a+r /etc/apt/keyrings/docker.asc > /dev/null 2> install_errors.log
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
+  $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null 2> install_errors.log
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin -y > /dev/null 2> install_errors.log
+for frame in "${frames[@]}"; do
+    echo -ne "$frame Installing Docker\r"
+    sleep 0.2
+done
+tput el
+
+# Install Git
+sudo apt install git -y > /dev/null 2> install_errors.log
+for frame in "${frames[@]}"; do
+    echo -ne "$frame Installing git\r"
+    sleep 0.2
+done
+tput el
+
+clear
+welcome_message="Thank you for using me 😍  "
+header
+echo "Everything was Installed Successfully"
+
