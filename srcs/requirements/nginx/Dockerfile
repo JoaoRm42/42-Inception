@@ -39,6 +39,9 @@ RUN openssl req -x509 -new -newkey rsa:2048 -nodes \
 # the process of creating it and doesn't return an error
 RUN mkdir -p run/nginx
 
+
+RUN chmod 755 /var/www/html
+RUN chown -R www-data:www-data /var/www/html
 # The default command of the nginx image which is executed when you run the container
 # is set to CMD ["nginx", "-g", "daemon off;"]. When you run the attach command your
 # terminal attaches to the nginx process.

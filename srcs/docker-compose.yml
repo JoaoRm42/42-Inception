@@ -3,6 +3,7 @@ services:
     build: requirements/nginx
     env_file:
       - .env
+      - ../../.env
     container_name: nginx
     depends_on:
       - wordpress
@@ -17,6 +18,7 @@ services:
     build: requirements/wordpress
     env_file:
       - .env
+      - ../../.env
     container_name: wordpress
     depends_on:
       - mariadb
@@ -31,6 +33,7 @@ services:
     build: requirements/mariadb
     env_file:
       - .env
+      - ../../.env
     container_name: mariadb
     volumes:
       - mariadb:/var/lib/mysql
