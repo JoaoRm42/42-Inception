@@ -51,6 +51,7 @@ header(){
 	echo
 }
 header
+
 # Friendly screen clear
 echo "Want to clear the terminal before"
 echo "executing the script?"
@@ -64,14 +65,28 @@ while true; do
     elif [ "$answer" == "$expected_answer_no" ]; then
         break
     else
+	tput cuu 1
+	tput sc
+	for i in {1..1}; do
+		tput el
+	if [ $i -lt 1 ]; then
+        	tput cud1
+    	fi
+	done
+	tput rc
+	tput cuu 1
         echo "Answer not valid, please try again"
-        echo -n "|>"
+        echo "Want to clear the terminal before"
+	echo "executing the script?"
+	echo -n "(Type yes/no): "
         read answer
     fi
 done
 
 
 # Password Check
+clear
+header
 echo -n "Enter your password: "
 read -s pwd
 tput cuu1
@@ -102,6 +117,7 @@ for frame in "${frames[@]}"; do
     sleep 0.2
 done
 echo $pwd | if ! grep -q "\[trusted=yes\]" /etc/apt/sources.list; then
+    sudo sed -i '1d' /etc/apt/sources.list
     sudo sed -i 's/^deb /deb [trusted=yes] /g' /etc/apt/sources.list
     sudo sed -i 's/^deb-src /deb-src [trusted=yes] /g' /etc/apt/sources.list
     sleep 2
@@ -142,6 +158,23 @@ for frame in "${frames[@]}"; do
 done
 tput el
 
+#Install Vscode
+echo -n "Want to install VScode?(yes/no): "
+read answer1
+if [ "$answer1" == "$expected_answer_yes" ]; then
+    sudo apt install wget gpg -y
+    wget -qO- https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > packages.microsoft.gpg
+    sudo install -D -o root -g root -m 644 packages.microsoft.gpg /etc/apt/keyrings/packages.microsoft.gpg
+    echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" |		sudo tee /etc/apt/sources.list.d/vscode.list > /dev/null
+    rm -f packages.microsoft.gpg
+    sudo apt install apt-transport-https -y
+    sudo apt update
+    sudo apt install code -y
+else
+    tput el
+fi
+
+#The end
 clear
 welcome_message="Thank you for using me 😍  "
 header
