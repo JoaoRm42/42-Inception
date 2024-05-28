@@ -30,3 +30,7 @@ DOCKER_UP: CREATE_FILES DOCKER_IMAGE_BUILD IP_DOMAIN
 
 DOCKER_DW:
 	sudo docker compose -f ./srcs/docker-compose.yml down
+
+DOCKER_CLEAN: DOCKER_DW
+	sudo rm -rf /home/joaoped2/Desktop/inception_data
+	sudo docker system prune -af --volumes
