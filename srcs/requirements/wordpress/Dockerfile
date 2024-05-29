@@ -17,7 +17,7 @@ FROM debian:bullseye
 EXPOSE 9000
 
 # Copy the WP Setup to the container
-COPY ./tools/script.sh /tmp/
+COPY ./tools/script.sh /tmp/script.sh
 
 # Easy configuration with cli
 RUN apt update && apt install wget -y

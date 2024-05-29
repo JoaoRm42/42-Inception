@@ -10,10 +10,10 @@
 #                                                                              #
 # **************************************************************************** #
 
-all: DOCKER_UP
+all: INITIALIZE
 
 
-INITIALIZE: CREATE_FILES DOCKER_UP IP_DOMAIN
+INITIALIZE: CREATE_FILES IP_DOMAIN DOCKER_UP
 
 
 CREATE_FILES: 
@@ -23,20 +23,20 @@ DOCKER_IMAGE_BUILD:
 	sudo docker compose -f ./srcs/docker-compose.yml build --no-cache
 
 IP_DOMAIN:
-	sudo grep -Fq "joaoped2.42.fr" /etc/hosts || sudo sed -it '/127\.0\.0\.1/ s/$$/ joaoped2.42.fr/' /etc/hosts
+	sudo sed -i '/^127.0.0.1/ {/joaoped2.42.fr/! s/localhost/localhost joaoped2.42.fr/}' /etc/hosts
 
-DOCKER_UP: CREATE_FILES DOCKER_IMAGE_BUILD IP_DOMAIN
+DOCKER_UP: CREATE_FILES DOCKER_IMAGE_BUILD
 	sudo docker compose -f ./srcs/docker-compose.yml up -d --no-build
 
-DOCKER_ST:
+start:
 	sudo docker compose -f ./srcs/docker-compose.yml up -d --no-build
 
-DOCKER_STP:
+stop:
 	sudo docker compose -f ./srcs/docker-compose.yml stop
 
-DOCKER_DW:
+clean: stop
 	sudo docker compose -f ./srcs/docker-compose.yml down
-
-DOCKER_CLEAN: DOCKER_DW
 	sudo rm -rf /home/joaoped2/Desktop/inception_data
 	sudo docker system prune -af --volumes
+
+re: clean INITIALIZE 

@@ -14,7 +14,7 @@
 FROM debian:bullseye
 
 # Let's Expose the port for nginx to run on
-EXPOSE 443
+EXPOSE 433
 
 # Check for updates and install the necessary files
 # to install nginx and openssl successfully
