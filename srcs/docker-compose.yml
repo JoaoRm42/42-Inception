@@ -1,6 +1,6 @@
 services:
   nginx:
-    build: requirements/nginx
+    build: ./requirements/nginx
     env_file:
       - .env
       - ../../.env
@@ -15,7 +15,7 @@ services:
       - joaoped2
     restart: always
   wordpress:
-    build: requirements/wordpress
+    build: ./requirements/wordpress
     env_file:
       - .env
       - ../../.env
@@ -30,7 +30,7 @@ services:
       - joaoped2
     restart: always
   mariadb:
-    build: requirements/mariadb
+    build: ./requirements/mariadb
     env_file:
       - .env
       - ../../.env
