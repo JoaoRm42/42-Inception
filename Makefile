@@ -36,6 +36,7 @@ stop:
 
 clean: stop
 	sudo docker compose -f ./srcs/docker-compose.yml down
+	sudo docker volume rm srcs_mariadb srcs_wordpress
 	sudo rm -rf /home/joaoped2/Desktop/inception_data
 	sudo docker system prune -af --volumes
 
