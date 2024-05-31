@@ -48,13 +48,13 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: "/home/joaoped2/Desktop/inception_data/WP_V"
+      device: "/home/joaoped2/data"
   mariadb:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: "/home/joaoped2/Desktop/inception_data/MDB_V"
+      device: "/home/joaoped2/data"
 networks:
   joaoped2:
     driver: bridge

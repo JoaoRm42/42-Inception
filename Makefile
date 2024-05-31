@@ -17,7 +17,7 @@ INITIALIZE: CREATE_FILES IP_DOMAIN DOCKER_UP
 
 
 CREATE_FILES: 
-	mkdir -p /home/joaoped2/Desktop/inception_data /home/joaoped2/Desktop/inception_data/WP_V /home/joaoped2/Desktop/inception_data/MDB_V
+	mkdir -p /home/joaoped2/data
 
 DOCKER_IMAGE_BUILD:
 	sudo docker compose -f ./srcs/docker-compose.yml build --no-cache
@@ -37,7 +37,7 @@ stop:
 clean: stop
 	sudo docker compose -f ./srcs/docker-compose.yml down
 	sudo docker volume rm srcs_mariadb srcs_wordpress
-	sudo rm -rf /home/joaoped2/Desktop/inception_data
+	sudo rm -rf /home/joaoped2/data
 	sudo docker system prune -af --volumes
 
 re: clean INITIALIZE 

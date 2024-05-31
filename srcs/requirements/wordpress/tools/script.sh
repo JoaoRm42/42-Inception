@@ -1,4 +1,5 @@
 #!/bin/bash
+
 sleep 5s
 cd /var/www/wordpress
 if [ ! -f "/var/www/wordpress/index.php" ]; then

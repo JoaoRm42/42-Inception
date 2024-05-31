@@ -56,10 +56,10 @@ RUN mkdir /var/www/wordpress
 RUN chown -R root:root /var/www/wordpress
 
 # Copy the WP Setup to the container
-COPY ./tools/script.sh /var/www/wordpress/script.sh
+COPY ./tools/script.sh /
 COPY conf/php-fpm.conf /etc/php7/php-fpm.conf
 
 COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/
 
-ENTRYPOINT [ "sh", "/var/www/wordpress/script.sh" ]
+ENTRYPOINT [ "sh", "/script.sh" ]
 
