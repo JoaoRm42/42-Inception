@@ -14,12 +14,12 @@
 FROM debian:bullseye
 
 # Let's Expose the port for nginx to run on
-EXPOSE 433
+EXPOSE 443
 
 # Check for updates and install the necessary files
 # to install nginx and openssl successfully
 RUN apt update && apt upgrade -y
-RUN apt install nginx openssl libssl-dev -y
+RUN apt install nginx openssl -y
 
 # We first copy the configuration file of nginx to the container
 COPY ./conf/nginx.conf /etc/nginx/conf.d
@@ -39,9 +39,6 @@ RUN openssl req -x509 -new -newkey rsa:2048 -nodes \
 # the process of creating it and doesn't return an error
 RUN mkdir -p run/nginx
 
-
-RUN chmod 755 /var/www/html
-RUN chown -R www-data:www-data /var/www/html
 # The default command of the nginx image which is executed when you run the container
 # is set to CMD ["nginx", "-g", "daemon off;"]. When you run the attach command your
 # terminal attaches to the nginx process.

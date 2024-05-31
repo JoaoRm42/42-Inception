@@ -10,7 +10,7 @@ services:
     volumes:
       - wordpress:/var/www/wordpress
     ports:
-      - "433:433"
+      - "443:443"
     networks:
       - joaoped2
     restart: always
