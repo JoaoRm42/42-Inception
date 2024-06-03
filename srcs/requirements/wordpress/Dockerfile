@@ -19,7 +19,15 @@ EXPOSE 9000
 # Check for updates and install the necessary files
 # to install Wordpress successfully
 RUN apt update && apt upgrade -y
+#PHP-fpm is a version PHP that talks to the outside world 
+#with a protocol (a style of communication) called FastCGI
+#PHP-mysql provides the MySQL module(s) for PHP
 RUN apt install wget mariadb-client php7.4-fpm php7.4-mysql -y
+#WP-CLI is the official command-line interface for WordPress.
+#It lets you manage your WordPress site, themes, and plugins
+#from the terminal, which is often a more convenient way for
+#moderate to advanced WordPress users (or developers) to work
+#with WordPress sites.
 RUN wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
@@ -30,5 +38,6 @@ RUN chown -R root:root /var/www/wordpress
 COPY ./tools/script.sh /
 COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/
 
+#An ENTRYPOINT instruction is used to set executables
+#that will always run when the container is initiated
 ENTRYPOINT [ "sh", "/script.sh" ]
-

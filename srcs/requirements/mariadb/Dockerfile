@@ -28,4 +28,6 @@ COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 # Copy the script of the configuration of the database
 COPY ./tools/script.sh /tmp/script.sh
 
+#An ENTRYPOINT instruction is used to set executables
+#that will always run when the container is initiated
 ENTRYPOINT [ "sh", "/tmp/script.sh" ]

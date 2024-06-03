@@ -32,8 +32,6 @@ RUN openssl req -x509 -new -newkey rsa:2048 -nodes \
                 -keyout etc/nginx/ssl/joaoped2_42_fr.key \
                 -subj "/C=PT/ST=Porto/L=Porto/O=42/OU=joaoped2/CN=joaoped2.42.fr"
 
-
-#RUN service nginx restart
 # Let's create a folder for nginx to store runtime files
 # I use mkdir -p so if the folder already exists it ignores
 # the process of creating it and doesn't return an error
