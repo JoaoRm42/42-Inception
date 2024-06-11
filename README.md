@@ -61,8 +61,8 @@ Here's a brief overview of the project structure:
 
 1. **Clone the Repository**:
     ```bash
-    git clone https://github.com/yourusername/42-project-inception.git
-    cd 42-project-inception
+    git clone https://github.com/joaoped2-42PORTO/Inception.git
+    cd Inception
     ```
 
 2. **Set Up Environment Variables**:
@@ -91,15 +91,24 @@ Here's a brief overview of the project structure:
     LOGGED_IN_SALT   =
     NONCE_SALT       =
     ```
-
-3. **Build and Run the Containers**:
-    ```bash
-    docker-compose up --build
+    
+3. **Edit Makefile line 26**
+   ```
+    sudo sed -i '/^127.0.0.1/ {/joaoped2.42.fr/! s/localhost/localhost joaoped2.42.fr/}' /etc/hosts
+   ```
+   to
+   ```
+   sudo sed -i '/^127.0.0.1/ {/yourlogin.42.fr/! s/localhost/localhost yourlogin.42.fr/}' /etc/hosts
+   ```
+   
+4. **Build and Run the Containers**:
+    ```
+    make all
     ```
 
 ## Usage
 
-- Access the WordPress site at `http://localhost` (or the domain you've configured).
+- Access the WordPress site at `http://yourlogin.42.fr` (or the domain you've configured).
 - The Nginx reverse proxy is configured to handle requests and route them to the appropriate service.
 - The MariaDB database is set up to store the WordPress data.
 
