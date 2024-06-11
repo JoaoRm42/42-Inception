@@ -100,8 +100,17 @@ Here's a brief overview of the project structure:
    ```
    sudo sed -i '/^127.0.0.1/ {/yourlogin.42.fr/! s/localhost/localhost yourlogin.42.fr/}' /etc/hosts
    ```
-   
-4. **Build and Run the Containers**:
+
+4. **Edit Docker Compose file**
+  Line 51 and 57
+   ```
+   device: "/home/joaoped2/data"
+   ```
+   to
+   ```
+   device: "/home/yourlogin/data"
+   ```
+6. **Build and Run the Containers**:
     ```
     make all
     ```
