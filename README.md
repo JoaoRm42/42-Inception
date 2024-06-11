@@ -61,8 +61,8 @@ Here's a brief overview of the project structure:
 
 1. **Clone the Repository**:
     ```bash
-    git clone https://github.com/joaoped2-42PORTO/Inception.git
-    cd Inception
+    git clone https://github.com/joaoped2-42PORTO/42-Inception.git
+    cd 42-Inception
     ```
 
 2. **Set Up Environment Variables**:
