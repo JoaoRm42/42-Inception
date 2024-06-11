@@ -67,7 +67,7 @@ Here's a brief overview of the project structure:
 
 2. **Set Up Environment Variables**:
     Go to `./srcs/.env` and add the necessary environment variables:
-    ```env
+    ```
     SPUSR_WP         =
     SPUSR_PWD_WP     =
     SPUSR_EMAIL_WP   =
