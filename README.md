@@ -68,20 +68,20 @@ Here's a brief overview of the project structure:
 2. **Set Up Environment Variables**:
     Go to `./srcs/.env` and add the necessary environment variables:
     ```env
-    SPUSR_WP       =
-    SPUSR_PWD_WP   =
-    SPUSR_EMAIL_WP =
-    USR_WP       =
-    USR_PWD_WP   =
-    USR_EMAIL_WP =
-    DB_USER      =
-    DB_USER_PSWD =
-    DB_ROOT_PSWD =
-    DB_HOST      =
-    DB           =
-    DOMAIN =
-    TITLE_WP =
-    PATH_WP  =
+    SPUSR_WP         =
+    SPUSR_PWD_WP     =
+    SPUSR_EMAIL_WP   =
+    USR_WP           =
+    USR_PWD_WP       =
+    USR_EMAIL_WP     =
+    DB_USER          =
+    DB_USER_PSWD     =
+    DB_ROOT_PSWD     =
+    DB_HOST          =
+    DB               =
+    DOMAIN           =
+    TITLE_WP         =
+    PATH_WP          =
     AUTH_KEY         =
     SECURE_AUTH_KEY  =
     LOGGED_IN_KEY    =
