@@ -1,0 +1,105 @@
+# 42 Project Inception
+
+Welcome to the 42 Project Inception repository! This project is part of the curriculum at 42, a globally recognized coding school. The goal of this project is to dive deep into system administration by setting up a WordPress website with multiple services using Docker.
+
+## Table of Contents
+- [Introduction](#introduction)
+- [Project Objectives](#project-objectives)
+- [Requirements](#requirements)
+- [Project Structure](#project-structure)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [License](#license)
+- [Acknowledgments](#acknowledgments)
+
+## Introduction
+
+Inception is a system administration project that aims to familiarize students with Docker and the setup of a web infrastructure. By completing this project, students will gain hands-on experience with containerization, network configuration, and service orchestration.
+
+## Project Objectives
+
+- Set up a multi-container environment using Docker.
+- Configure a web server to serve a WordPress site.
+- Implement a reverse proxy using Nginx.
+- Set up a database server for the WordPress site.
+- Secure the services with SSL/TLS.
+- Create Dockerfiles and Compose files to automate the setup.
+
+## Requirements
+
+- A basic understanding of Docker and containerization concepts.
+- Familiarity with web servers, databases, and network configuration.
+- Access to a Unix-based system (Linux or macOS).
+
+## Project Structure
+
+Here's a brief overview of the project structure:
+
+.
+├── srcs
+│ ├── requirements
+│ │ ├── wordpress
+│ │ │ ├── Dockerfile
+│ │ │ └── ...
+│ │ ├── nginx
+│ │ │ ├── Dockerfile
+│ │ │ └── ...
+│ │ ├── mariadb
+│ │ │ ├── Dockerfile
+│ │ │ └── ...
+│ ├── docker-compose.yml
+│ └── .env
+└── README.md
+
+
+- **srcs/**: Contains all the source files for the project.
+  - **requirements/**: Contains subdirectories for each service (WordPress, Nginx, MariaDB).
+  - **docker-compose.yml**: The Compose file to set up the multi-container environment.
+  - **.env**: Environment variables file.
+
+## Installation
+
+1. **Clone the Repository**:
+    ```bash
+    git clone https://github.com/yourusername/42-project-inception.git
+    cd 42-project-inception
+    ```
+
+2. **Set Up Environment Variables**:
+    Create a `.env` file in the root directory and define the necessary environment variables:
+    ```env
+    MYSQL_ROOT_PASSWORD=your_root_password
+    MYSQL_USER=your_user
+    MYSQL_PASSWORD=your_password
+    MYSQL_DATABASE=your_database
+    ```
+
+3. **Build and Run the Containers**:
+    ```bash
+    docker-compose up --build
+    ```
+
+## Usage
+
+- Access the WordPress site at `http://localhost` (or the domain you've configured).
+- The Nginx reverse proxy is configured to handle requests and route them to the appropriate service.
+- The MariaDB database is set up to store the WordPress data.
+
+## Contributing
+
+Contributions are welcome! If you have any suggestions or improvements, feel free to create an issue or submit a pull request. Please ensure that your contributions adhere to the coding standards and guidelines of the project.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- The 42 Network for providing the inspiration and resources for this project.
+- The Docker and WordPress communities for their excellent documentation and support.
+- All contributors who have helped improve this project.
+
+---
+
+Happy coding!
