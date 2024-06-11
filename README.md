@@ -34,7 +34,7 @@ Inception is a system administration project that aims to familiarize students w
 ## Project Structure
 
 Here's a brief overview of the project structure:
-
+```
 .
 ├── srcs
 │ ├── requirements
@@ -50,7 +50,7 @@ Here's a brief overview of the project structure:
 │ ├── docker-compose.yml
 │ └── .env
 └── README.md
-
+```
 
 - **srcs/**: Contains all the source files for the project.
   - **requirements/**: Contains subdirectories for each service (WordPress, Nginx, MariaDB).
