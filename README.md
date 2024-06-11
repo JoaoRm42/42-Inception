@@ -10,7 +10,6 @@ Welcome to the 42 Project Inception repository! This project is part of the curr
 - [Installation](#installation)
 - [Usage](#usage)
 - [Contributing](#contributing)
-- [License](#license)
 - [Acknowledgments](#acknowledgments)
 
 ## Introduction
@@ -67,12 +66,30 @@ Here's a brief overview of the project structure:
     ```
 
 2. **Set Up Environment Variables**:
-    Create a `.env` file in the root directory and define the necessary environment variables:
+    Edit `./srcs/.env` the necessary environment variables:
     ```env
-    MYSQL_ROOT_PASSWORD=your_root_password
-    MYSQL_USER=your_user
-    MYSQL_PASSWORD=your_password
-    MYSQL_DATABASE=your_database
+    SPUSR_WP       =
+    SPUSR_PWD_WP   =
+    SPUSR_EMAIL_WP =
+    USR_WP       =
+    USR_PWD_WP   =
+    USR_EMAIL_WP =
+    DB_USER      =
+    DB_USER_PSWD =
+    DB_ROOT_PSWD =
+    DB_HOST      =
+    DB           =
+    DOMAIN =
+    TITLE_WP =
+    PATH_WP  =
+    AUTH_KEY         =
+    SECURE_AUTH_KEY  =
+    LOGGED_IN_KEY    =
+    NONCE_KEY        =
+    AUTH_SALT        =
+    SECURE_AUTH_SALT =
+    LOGGED_IN_SALT   =
+    NONCE_SALT       =
     ```
 
 3. **Build and Run the Containers**:
@@ -89,10 +106,6 @@ Here's a brief overview of the project structure:
 ## Contributing
 
 Contributions are welcome! If you have any suggestions or improvements, feel free to create an issue or submit a pull request. Please ensure that your contributions adhere to the coding standards and guidelines of the project.
-
-## License
-
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgments
 
